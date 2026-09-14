@@ -24,8 +24,8 @@ jobs:
     name: deno lint
     runs-on: ${{ matrix.runner }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: denoland/setup-deno@v1
+      - uses: actions/checkout@v6
+      - uses: denoland/setup-deno@v2.0.5
         with:
           deno-version: ${{ matrix.version }}
       - name: run lint
@@ -46,17 +46,17 @@ jobs:
     steps:
       - run: git config --global core.autocrlf false
         if: runner.os == 'Windows'
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           path: "./repo"
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           repository: "vim-denops/denops.vim"
           path: "./denops.vim"
       - uses: denoland/setup-deno@main
         with:
           deno-version: "${{ matrix.version }}"
-      - uses: thinca/action-setup-vim@v1
+      - uses: thinca/action-setup-vim@v3.0.3
         id: vim
         with:
           vim_type: "Vim"
@@ -67,7 +67,7 @@ jobs:
           echo ${DENOPS_TEST_VIM_EXECUTABLE}
         env:
           DENOPS_TEST_VIM_EXECUTABLE: ${{ steps.vim.outputs.executable_path }}
-      - uses: thinca/action-setup-vim@v1
+      - uses: thinca/action-setup-vim@v3.0.3
         id: nvim
         with:
           vim_type: "Neovim"
